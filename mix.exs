@@ -1,17 +1,32 @@
 defmodule Lamina.MixProject do
   use Mix.Project
+  @moduledoc false
+
+  @version "0.1.0"
+  @description "Application configuration done right"
 
   def project do
     [
       app: :lamina,
-      version: "0.1.0",
+      version: @version,
       elixir: "~> 1.11",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      description: @description,
+      deps: deps(),
+      package: package()
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
+  def package do
+    [
+      maintainers: ["James Harton <james@harton.nz>"],
+      licenses: ["Hippocratic"],
+      links: %{
+        "Source" => "https://gitlab.com/jimsy/lamina"
+      }
+    ]
+  end
+
   def application do
     [
       extra_applications: [:logger],
@@ -19,11 +34,11 @@ defmodule Lamina.MixProject do
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:credo, "~> 1.5"},
+      {:ex_doc, ">= 0.0.0", only: ~w[dev test]a},
+      {:git_ops, "~> 2.3", only: ~w[dev test]a, runtime: false}
     ]
   end
 end
