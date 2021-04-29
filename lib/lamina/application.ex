@@ -7,7 +7,11 @@ defmodule Lamina.Application do
 
   @impl true
   def start(_type, _args) do
-    []
+    [
+      Lamina.Registry.ServerRegistry,
+      Lamina.Registry.PubSubRegistry,
+      MyHttpServer.Config
+    ]
     |> Supervisor.start_link(strategy: :one_for_one, name: Lamina.Supervisor)
   end
 end

@@ -1,6 +1,8 @@
 # Lamina
 
-**TODO: Add description**
+Lamina manages runtime configuration for Elixir projects.
+
+
 
 ## Installation
 
