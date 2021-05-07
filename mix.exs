@@ -2,7 +2,7 @@ defmodule Lamina.MixProject do
   use Mix.Project
   @moduledoc false
 
-  @version "0.1.0"
+  @version "0.2.0"
   @description "Application configuration done right"
 
   def project do

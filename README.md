@@ -12,7 +12,7 @@ by adding `lamina` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:lamina, "~> 0.1.0"}
+    {:lamina, "~> 0.2.0"}
   ]
 end
 ```

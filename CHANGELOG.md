@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.2.0](https://gitlab.com/jimsy/lamina/compare/v0.1.0...v0.2.0) (2021-05-07)
+
+
+
+
+### Features:
+
+* add configuration server and default providers.
+
 ## [v0.1.0](https://gitlab.com/jimsy/lamina/compare/v0.1.0...v0.1.0) (2021-04-28)
 
 
