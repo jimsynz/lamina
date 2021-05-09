@@ -166,4 +166,4 @@ def deps do
 end
 ```
 
-Documentation for the latest release can be found on [HexDocs](https://hexdocs.pm/lamina) and for the `main` branch [here](https://gitlab.com/jimsy/lamina).
+Documentation for the latest release can be found on [HexDocs](https://hexdocs.pm/lamina) and for the `main` branch [here](https://jimsy.gitlab.io/lamina/api-reference.html).
