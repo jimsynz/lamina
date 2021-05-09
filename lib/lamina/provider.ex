@@ -2,7 +2,7 @@ defmodule Lamina.Provider do
   @moduledoc """
   The `Provider` behaviour is used to declare configuration providers.
 
-  Lamina's flexibility comes from the ability to provider adapters for may
+  Lamina's flexibility comes from the ability to provide adapters for may
   configuration sources and be able to query them in order to build a composite
   view of the system's configuration.  The `Lamina.Provider` behaviour allows
   you to define these adapters.

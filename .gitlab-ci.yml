@@ -131,6 +131,8 @@ release-gitlab:
 
 release-hex:
   image: elixir:latest
+  variables:
+    MIX_ENV: "dev"
   dependencies:
     - build
   stage: release

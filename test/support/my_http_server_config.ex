@@ -2,7 +2,7 @@ defmodule MyHttpServer.Config do
   use Lamina
 
   @moduledoc """
-  This is an example configuration module, mostly used to tests.
+  This is an example configuration module, mostly used for tests.
   """
 
   provider(Lamina.Provider.Default, listen_port: 4000, listen_address: "0.0.0.0")

@@ -30,7 +30,7 @@ defmodule Lamina.DSL do
 
   ```elixir
   provider(Lamina.Provider.Env, prefix: "HTTP")
-  ````
+  ```
   """
   @spec provider(module, keyword) :: Macro.t()
   defmacro provider(module, options) do
