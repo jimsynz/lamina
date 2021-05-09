@@ -1,6 +1,6 @@
 defmodule Lamina.Server.ConfigModule do
   alias Lamina.Error.{InvalidValueError, NotALaminaModuleError}
-  @moduledoc "Wrapper around access a Lamina configuration module"
+  @moduledoc "Wrapper around access to a Lamina configuration module"
 
   @doc """
   Ensure that the module in question actually implements the Lamina behaviour.

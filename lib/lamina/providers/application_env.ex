@@ -20,36 +20,48 @@ defmodule Lamina.Provider.ApplicationEnv do
 
   ```elixir
   import Config
-  config :flat_app, jigga_watts: 1.21
-  config :nested_app, :time_machine, model: :delorean
+  config :lamina,
+    jigga_watts: 1.21,
+    time_machine: [model: :delorean, top_speed: 88]
   ```
 
   We can retrieve the configurations from the environment:
 
-      iex> {:ok, state} = ApplicationEnv.init(otp_app: :flat_app)
+      iex> {:ok, state, _refresh_period} = ApplicationEnv.init(otp_app: :lamina)
       ...> {:ok, 1.21, :volatile, _state} = ApplicationEnv.fetch_config(:jigga_watts, state)
 
-      iex> {:ok, state} = ApplicationEnv.init(otp_app: :nested_app, key: :time_machine)
+      iex> {:ok, state, _refresh_period} = ApplicationEnv.init(otp_app: :lamina, key: :time_machine)
       ...> {:ok, :delorean, :volatile, _state} = ApplicationEnv.fetch_config(:model, state)
 
   """
 
   @type options :: [option]
-  @type option :: otp_app_option | key_option
+  @type option :: otp_app_option | key_option | refresh_period_option | lifetime_option
   @type otp_app_option :: {:otp_app, atom}
   @type key_option :: {:key, atom}
+  @type refresh_period_option :: {:refresh_period, pos_integer()}
+  @type lifetime_option :: {:lifetime, Lamina.Provider.lifetime()}
 
   @type state :: %{
           required(:otp_app) => atom,
+          required(:refresh_period) => pos_integer,
+          required(:lifetime) => Lamina.Provider.lifetime(),
           optional(:key) => atom
         }
+
+  @default_refresh_period :timer.seconds(10)
 
   @doc false
   @impl true
   def init(opts) do
-    with {:ok, state} <- otp_app_config(%{}, opts),
+    state = %{
+      refresh_period: Keyword.get(opts, :refresh_period, @default_refresh_period),
+      lifetime: Keyword.get(opts, :lifetime, :volatile)
+    }
+
+    with {:ok, state} <- otp_app_config(state, opts),
          {:ok, state} <- key_config(state, opts) do
-      {:ok, state}
+      {:ok, state, state.refresh_period}
     end
   end
 
@@ -61,13 +73,14 @@ defmodule Lamina.Provider.ApplicationEnv do
              lifetime: Lamina.Provider.lifetime(),
              value: any,
              reason: any
-  def fetch_config(config_key, %{otp_app: otp_app, key: key} = state) when is_atom(config_key) do
+  def fetch_config(config_key, %{otp_app: otp_app, key: key, lifetime: lifetime} = state)
+      when is_atom(config_key) do
     config =
       otp_app
       |> Application.get_env(key, [])
 
     case Keyword.fetch(config, config_key) do
-      {:ok, value} -> {:ok, value, :volatile, state}
+      {:ok, value} -> {:ok, value, lifetime, state}
       :error -> {:ok, state}
     end
   end
@@ -85,24 +98,37 @@ defmodule Lamina.Provider.ApplicationEnv do
 
   @spec otp_app_config(map, keyword) :: {:ok, state} | {:error, any}
   defp otp_app_config(state, opts) do
-    case Keyword.fetch(opts, :otp_app) do
-      {:ok, value} when is_atom(value) ->
-        {:ok, Map.put(state, :otp_app, value)}
+    with {:ok, value} when is_atom(value) <- Keyword.fetch(opts, :otp_app),
+         app_spec when is_list(app_spec) <- Application.spec(value) do
+      {:ok, Map.put(state, :otp_app, value)}
+    else
+      nil ->
+        {:error,
+         ArgumentError.exception(
+           message: "ApplicationEnv `otp_app` is not a valid OTP application"
+         )}
 
       {:ok, _} ->
-        {:error, "ApplicationEnv `otp_app` option must be an atom"}
+        {:error,
+         ArgumentError.exception(message: "ApplicationEnv `otp_app` option must be an atom")}
 
       :error ->
-        {:error, "ApplicationEnv provider requires an `otp_app` option"}
+        {:error,
+         ArgumentError.exception(message: "ApplicationEnv provider requires an `otp_app` option")}
     end
   end
 
   @spec key_config(state, keyword) :: {:ok, state} | {:error, any}
   defp key_config(state, opts) do
     case Keyword.fetch(opts, :key) do
-      {:ok, value} when is_atom(value) -> {:ok, Map.put(state, :key, value)}
-      {:ok, _} -> {:error, "ApplicationEnv `key` option must be an atom"}
-      :error -> {:ok, state}
+      {:ok, value} when is_atom(value) ->
+        {:ok, Map.put(state, :key, value)}
+
+      {:ok, _} ->
+        {:error, ArgumentError.exception(message: "ApplicationEnv `key` option must be an atom")}
+
+      :error ->
+        {:ok, state}
     end
   end
 end

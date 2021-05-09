@@ -24,5 +24,5 @@ defmodule Lamina.Error.NotRegisteredError do
 
   @impl true
   def message(%NotRegisteredError{module: module}),
-    do: "Module `#{inspect(module)}` does not implement the `Lamina` behaviour."
+    do: "There is no Lamina Server running for module `#{inspect(module)}`."
 end

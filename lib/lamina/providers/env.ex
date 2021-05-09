@@ -40,24 +40,26 @@ defmodule Lamina.Provider.Env do
   """
 
   @type options :: [option]
-  @type option :: prefix_option | mangler_option | refresh_period_opion
+  @type option :: prefix_option | mangler_option | refresh_period_option | lifetime_option
   @type prefix_option :: {:prefix, String.t()}
   @type mangler_option :: {:mangler, (atom, any -> String.t())}
-  @type refresh_period_opion :: {:refresh_period, pos_integer}
+  @type refresh_period_option :: {:refresh_period, pos_integer}
+  @type lifetime_option :: {:lifetime, Lamina.Provider.lifetime()}
   @type state :: %{
           required(:mangler) => (atom, any -> String.t()),
           required(:refresh_period) => pos_integer,
+          required(:lifetime) => Lamina.Provider.lifetime(),
           optional(:prefix) => String.t()
         }
 
   @default_refresh_period :timer.seconds(10)
 
   @impl true
-  @spec init(keyword) :: {:ok, state, pos_integer}
   def init(opts) do
     state = %{
       mangler: Keyword.get(opts, :mangler, &name_mangler/2),
-      refresh_period: Keyword.get(opts, :refresh_period, @default_refresh_period)
+      refresh_period: Keyword.get(opts, :refresh_period, @default_refresh_period),
+      lifetime: Keyword.get(opts, :lifetime, :volatile)
     }
 
     state =
@@ -77,11 +79,11 @@ defmodule Lamina.Provider.Env do
              lifetime: Lamina.Provider.lifetime(),
              value: any,
              reason: any
-  def fetch_config(config_key, %{mangler: mangler} = state) do
+  def fetch_config(config_key, %{mangler: mangler, lifetime: lifetime} = state) do
     name = apply(mangler, [config_key, state])
 
     case System.fetch_env(name) do
-      {:ok, value} -> {:ok, value, :volatile, state}
+      {:ok, value} -> {:ok, value, lifetime, state}
       :error -> {:ok, state}
     end
   end

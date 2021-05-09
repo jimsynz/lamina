@@ -3,7 +3,7 @@ defmodule Lamina.MixProject do
   @moduledoc false
 
   @version "0.2.0"
-  @description "Application configuration done right"
+  @description "Dynamic, runtime configuration for your Elixir app"
 
   def project do
     [
@@ -43,6 +43,7 @@ defmodule Lamina.MixProject do
       {:faker, "~> 0.16.0", only: ~w[dev test]a},
       {:git_ops, "~> 2.3", only: ~w[dev test]a, runtime: false},
       {:mimic, "~> 1.5", only: ~w[dev test]a},
+      {:plug_cowboy, "~> 2.5", only: ~w[dev test]a},
       {:recase, "~> 0.7"}
     ]
   end

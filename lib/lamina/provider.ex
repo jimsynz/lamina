@@ -1,6 +1,30 @@
 defmodule Lamina.Provider do
   @moduledoc """
-  The `Configuration` behaviour is used to declare configuration adapters.
+  The `Provider` behaviour is used to declare configuration providers.
+
+  Lamina's flexibility comes from the ability to provider adapters for may
+  configuration sources and be able to query them in order to build a composite
+  view of the system's configuration.  The `Lamina.Provider` behaviour allows
+  you to define these adapters.
+
+  ## Example:
+
+  As a minimum you must implement the `fetch_config/2` callback, which is used
+  to look up individual configuration values in your storage:
+
+  ```elixir
+  defmodule MapProvider do
+    use Lamina.Provider
+
+    @impl true
+    def fetch_config(config_key, state) do
+      case Map.fetch(state, config_key) do
+        {:ok, value} -> {:ok, value, :volatile, state}
+        :error -> {:ok, state}
+      end
+    end
+  end
+  ```
   """
 
   @type state :: any
@@ -59,8 +83,7 @@ defmodule Lamina.Provider do
   ## Arguments
 
     - `config_key` - the name of the configuration value to be returned.
-    - `state` - the provider state as previously returned by `init/1` or
-      previous calls to `fetch_config/2`.
+    - `state` - the current provider state.
 
   ## Return values
 

@@ -5,12 +5,12 @@ defmodule Lamina.Application do
 
   use Application
 
+  @doc false
   @impl true
   def start(_type, _args) do
     [
       Lamina.Registry.ServerRegistry,
-      Lamina.Registry.PubSubRegistry,
-      MyHttpServer.Config
+      Lamina.Registry.PubSubRegistry
     ]
     |> Supervisor.start_link(strategy: :one_for_one, name: Lamina.Supervisor)
   end

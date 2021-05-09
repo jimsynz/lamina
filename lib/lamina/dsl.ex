@@ -51,6 +51,10 @@ defmodule Lamina.DSL do
         Lamina.Server.get(__MODULE__, unquote(config_key))
       end
 
+      def unquote(:"#{config_key}!")() do
+        Lamina.Server.get!(__MODULE__, unquote(config_key))
+      end
+
       @configs unquote(config_key)
 
       def __lamina__(unquote(config_key), :cast, value), do: value
@@ -81,6 +85,10 @@ defmodule Lamina.DSL do
     quote do
       def unquote(config_key)() do
         Lamina.Server.get(__MODULE__, unquote(config_key))
+      end
+
+      def unquote(:"#{config_key}!")() do
+        Lamina.Server.get!(__MODULE__, unquote(config_key))
       end
 
       @configs unquote(config_key)
