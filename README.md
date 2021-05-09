@@ -151,6 +151,7 @@ defmodule MyHttpServer.Cowboy do
 
   def handle_info({:config_change, _, _, _}, state), do: {:noreply, state}
 end
+```
 
 ## Installation
 
