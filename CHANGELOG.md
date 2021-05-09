@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.2.1](https://gitlab.com/jimsy/lamina/compare/v0.2.0...v0.2.1) (2021-05-09)
+
+
+
+
+### Improvements:
+
+* added documentation and refactored for a release.
+
 ## [v0.2.0](https://gitlab.com/jimsy/lamina/compare/v0.1.0...v0.2.0) (2021-05-07)
 
 
