@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.2.2](https://gitlab.com/jimsy/lamina/compare/v0.2.1...v0.2.2) (2021-05-10)
+
+
+
+
+### Bug Fixes:
+
+* dsl: fix a compiler warning about an unused module attribute.
+
 ## [v0.2.1](https://gitlab.com/jimsy/lamina/compare/v0.2.0...v0.2.1) (2021-05-09)
 
 
