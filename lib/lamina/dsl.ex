@@ -95,6 +95,9 @@ defmodule Lamina.DSL do
 
       import Lamina.DSL.Config
       @config_key unquote(config_key)
+      @cast nil
+      @validate nil
+
       unquote(block)
       @config_key nil
 
