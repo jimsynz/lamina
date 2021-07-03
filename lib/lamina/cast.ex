@@ -28,4 +28,22 @@ defmodule Lamina.Cast do
   def to_float(value) when is_float(value), do: value
   def to_float(value) when is_binary(value), do: String.to_float(value)
   def to_float(value) when is_list(value), do: List.to_float(value)
+
+  @doc """
+  Attempt to convert the inbound value into an atom.
+  """
+  @spec to_atom(integer | float | binary | charlist) :: atom | no_return
+  def to_atom(value) when is_atom(value), do: value
+  def to_atom(value) when is_binary(value), do: value |> String.to_atom()
+  def to_atom(value) when is_number(value), do: value |> Kernel.to_string() |> String.to_atom()
+  def to_atom(value) when is_list(value), do: value |> List.to_string() |> String.to_atom()
+
+  @doc """
+  Attempt to convert the inbound value into an atom.
+  """
+  @spec to_string(integer | float | binary | charlist) :: String.t() | no_return
+  def to_string(value) when is_binary(value), do: value
+  def to_string(value) when is_atom(value), do: value |> Kernel.to_string()
+  def to_string(value) when is_number(value), do: value |> Kernel.to_string()
+  def to_string(value) when is_list(value), do: value |> List.to_string()
 end
