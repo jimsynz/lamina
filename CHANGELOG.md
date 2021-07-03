@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.2.3](https://gitlab.com/jimsy/lamina/compare/v0.2.2...v0.2.3) (2021-07-03)
+
+
+
+
+### Improvements:
+
+* add Cast.to_atom/1 and Cast.to_string/1.
+
 ## [v0.2.2](https://gitlab.com/jimsy/lamina/compare/v0.2.1...v0.2.2) (2021-05-10)
 
 
