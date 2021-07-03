@@ -34,7 +34,5 @@ defmodule Lamina.Error.ConfigNotFoundError do
 
   def message(%ConfigNotFoundError{config_key: config_key, state: %State{} = state}),
     do:
-      "The module `#{inspect(state.module)}` does not contain a configuration called `#{
-        config_key
-      }`"
+      "The module `#{inspect(state.module)}` does not contain a configuration called `#{config_key}`"
 end

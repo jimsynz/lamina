@@ -18,8 +18,6 @@ defmodule Lamina.Error.InvalidValueError do
 
   @impl true
   def message(%InvalidValueError{provider: provider, config_key: config_key, value: value}) do
-    "Provider `#{inspect(provider)}` returned invalid value `#{inspect(value)}` for config key `#{
-      config_key
-    }`"
+    "Provider `#{inspect(provider)}` returned invalid value `#{inspect(value)}` for config key `#{config_key}`"
   end
 end

@@ -219,9 +219,7 @@ defmodule Lamina.Server.Impl do
       if initial_value != final_value do
         Task.start_link(fn ->
           Logger.debug(
-            "Config for `#{inspect(module)}.#{config_key}` has changed from `#{
-              inspect(initial_value)
-            }` to `#{inspect(final_value)}`"
+            "Config for `#{inspect(module)}.#{config_key}` has changed from `#{inspect(initial_value)}` to `#{inspect(final_value)}`"
           )
 
           PubSubRegistry.publish(module, config_key, initial_value, final_value)
