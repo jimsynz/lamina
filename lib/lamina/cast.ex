@@ -46,4 +46,27 @@ defmodule Lamina.Cast do
   def to_string(value) when is_atom(value), do: value |> Kernel.to_string()
   def to_string(value) when is_number(value), do: value |> Kernel.to_string()
   def to_string(value) when is_list(value), do: value |> List.to_string()
+
+  @doc """
+  Attempt to convert the inbound value into a boolean.
+
+  Any string which when downcased evaluates to "true" or "yes" is considered
+  `true`, everything else is false.
+  """
+  @spec to_boolean(any) :: String.t() | no_return
+  def to_boolean(true), do: true
+
+  def to_boolean(value) when is_binary(value) do
+    value =
+      value
+      |> String.trim()
+      |> String.downcase()
+
+    value in ~w[yes true]
+  end
+
+  def to_boolean(value) when is_list(value),
+    do: value |> List.to_string() |> to_boolean()
+
+  def to_boolean(_), do: false
 end
