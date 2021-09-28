@@ -186,7 +186,7 @@ defmodule Lamina do
       @spec config_change(atom, any, any) :: :ok
       def config_change(config_key, old_value, new_value), do: :ok
 
-      @doc ~s"""
+      @doc """
       Subscribe the calling process to notifications about configuration
       changes.
 

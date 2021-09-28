@@ -50,10 +50,14 @@ defmodule Lamina.Cast do
   @doc """
   Attempt to convert the inbound value into a boolean.
 
-  Any string which when downcased evaluates to "true" or "yes" is considered
-  `true`, everything else is false.
+  Things that are considered true:
+
+    * A literal `true`.
+    * The words "true" or "yes" in any capitalisation.
+
+  Everything else is false.
   """
-  @spec to_boolean(any) :: String.t() | no_return
+  @spec to_boolean(any) :: boolean | no_return
   def to_boolean(true), do: true
 
   def to_boolean(value) when is_binary(value) do

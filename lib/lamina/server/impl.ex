@@ -1,5 +1,4 @@
 defmodule Lamina.Server.Impl do
-  require Logger
   alias Lamina.Error.StateError
   alias Lamina.Registry.{PubSubRegistry, ServerRegistry}
   alias Lamina.Server.{ConfigModule, ConfigValue, Provider, State, Table}
@@ -218,10 +217,6 @@ defmodule Lamina.Server.Impl do
          {:ok, %ConfigValue{value: final_value} = final_config} <- Table.get(table, config_key) do
       if initial_value != final_value do
         Task.start_link(fn ->
-          Logger.debug(
-            "Config for `#{inspect(module)}.#{config_key}` has changed from `#{inspect(initial_value)}` to `#{inspect(final_value)}`"
-          )
-
           PubSubRegistry.publish(module, config_key, initial_value, final_value)
           ConfigModule.config_change(module, config_key, initial_value, final_value)
         end)

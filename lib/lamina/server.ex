@@ -1,6 +1,5 @@
 defmodule Lamina.Server do
   use GenServer
-  require Logger
   alias Lamina.Registry.ServerRegistry
   alias Lamina.Server.{ConfigValue, Impl, State, Table}
 
