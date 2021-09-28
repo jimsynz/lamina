@@ -34,4 +34,15 @@ defmodule Lamina.Registry.ServerRegistry do
       _ -> {:error, Error.NotRegisteredError.exception(module)}
     end
   end
+
+  @doc """
+  Returns a list of all the currently running configuration servers on this
+  system.
+  """
+  @spec all_servers :: [module]
+  def all_servers do
+    __MODULE__
+    |> Registry.select([{{:"$1", :_, :_}, [], [{{:"$1"}}]}])
+    |> Enum.map(&elem(&1, 0))
+  end
 end
