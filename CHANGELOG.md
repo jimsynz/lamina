@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.3.0](https://gitlab.com/jimsy/lamina/compare/v0.2.3...v0.3.0) (2021-09-28)
+
+
+
+
+### Features:
+
+* Add `Cast.to_boolean/1` since it's very common.
+
 ## [v0.2.3](https://gitlab.com/jimsy/lamina/compare/v0.2.2...v0.2.3) (2021-07-03)
 
 
