@@ -40,7 +40,7 @@ defmodule Lamina.MixProject do
       {:credo, "~> 1.5", only: ~w[dev test]a},
       {:ex_doc, ">= 0.0.0", only: ~w[dev test]a},
       {:ex_machina, "~> 2.7", only: ~w[dev test]a},
-      {:faker, "~> 0.16.0", only: ~w[dev test]a},
+      {:faker, "~> 0.17.0", only: ~w[dev test]a},
       {:git_ops, "~> 2.3", only: ~w[dev test]a, runtime: false},
       {:mimic, "~> 1.5", only: ~w[dev test]a},
       {:recase, "~> 0.7"}
