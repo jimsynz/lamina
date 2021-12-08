@@ -37,7 +37,7 @@ defmodule Lamina.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.5", only: ~w[dev test]a},
+      {:credo, "~> 1.6", only: ~w[dev test]a},
       {:ex_doc, ">= 0.0.0", only: ~w[dev test]a},
       {:ex_machina, "~> 2.7", only: ~w[dev test]a},
       {:faker, "~> 0.17.0", only: ~w[dev test]a},
