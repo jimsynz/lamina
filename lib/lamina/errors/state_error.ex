@@ -9,7 +9,7 @@ defmodule Lamina.Error.StateError do
   This is an internal error within `Lamina.Server` and is strongly indicitave of
   a bug.  Please [open an issue][1].
 
-  [1]: https://gitlab.com/jimsy/lamina/-/issues
+  [1]: https://harton.dev/james/lamina/-/issues
   """
 
   @type t :: %StateError{

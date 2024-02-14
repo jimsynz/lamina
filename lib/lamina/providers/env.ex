@@ -80,7 +80,7 @@ defmodule Lamina.Provider.Env do
              value: any,
              reason: any
   def fetch_config(config_key, %{mangler: mangler, lifetime: lifetime} = state) do
-    name = apply(mangler, [config_key, state])
+    name = mangler.(config_key, state)
 
     case System.fetch_env(name) do
       {:ok, value} -> {:ok, value, lifetime, state}

@@ -26,13 +26,13 @@ defmodule Lamina.Server.ConfigModule do
   config keys.
   """
   @spec config_keys(module) :: [atom]
-  def config_keys(module), do: apply(module, :__lamina__, [:config_keys])
+  def config_keys(module), do: module.__lamina__(:config_keys)
 
   @doc """
   Call the Lamina callback on the configuration module and return the providers.
   """
   @spec providers(module) :: [{module, keyword}]
-  def providers(module), do: apply(module, :__lamina__, [:providers])
+  def providers(module), do: module.__lamina__(:providers)
 
   @doc """
   Call the Lamina callback on the configuration module to cast a configuration
@@ -40,7 +40,7 @@ defmodule Lamina.Server.ConfigModule do
   """
   @spec cast(module, atom, any) :: {:ok, any} | {:error, any}
   def cast(module, config_key, value) do
-    {:ok, apply(module, :__lamina__, [config_key, :cast, value])}
+    {:ok, module.__lamina__(config_key, :cast, value)}
   rescue
     error -> {:error, error}
   end
@@ -51,7 +51,7 @@ defmodule Lamina.Server.ConfigModule do
   """
   @spec validate(module, atom, any) :: {:ok, any} | {:error, any}
   def validate(module, config_key, value) do
-    if apply(module, :__lamina__, [config_key, :validate, value]) do
+    if module.__lamina__(config_key, :validate, value) do
       {:ok, value}
     else
       {:error,
@@ -67,5 +67,5 @@ defmodule Lamina.Server.ConfigModule do
   @spec config_change(module, config_key, old_value, new_value) :: :ok | no_return
         when config_key: atom, old_value: any, new_value: any
   def config_change(module, config_key, old_value, new_value),
-    do: apply(module, :config_change, [config_key, old_value, new_value])
+    do: module.config_change(config_key, old_value, new_value)
 end

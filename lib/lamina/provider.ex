@@ -27,6 +27,7 @@ defmodule Lamina.Provider do
   ```
   """
 
+  @type t :: module
   @type state :: any
   @type lifetime :: :static | :volatile | {pos_integer(), System.time_unit()}
 

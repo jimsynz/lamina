@@ -10,6 +10,7 @@ defmodule Lamina.Server.Provider do
   @type config_key :: atom
   @type lifetime :: Lamina.Provider.lifetime()
 
+  @doc false
   @spec is_provider_module(provider) :: {:ok, provider} | {:error, NotAProviderModuleError.t()}
   def is_provider_module(module) do
     behaviours =
@@ -26,9 +27,10 @@ defmodule Lamina.Server.Provider do
     UndefinedFunctionError -> {:error, NotAProviderModuleError.exception(module)}
   end
 
+  @doc false
   @spec start(provider, keyword) :: {:ok, state} | {:ok, state, pos_integer} | {:error, any}
   def start(module, opts) do
-    case apply(module, :init, [opts]) do
+    case module.init(opts) do
       {:ok, state} -> {:ok, state}
       {:ok, state, interval} -> {:ok, state, interval}
       {:error, reason} -> {:error, reason}
@@ -37,18 +39,20 @@ defmodule Lamina.Server.Provider do
     error -> {:error, error}
   end
 
+  @doc false
   @spec fetch_config(provider, config_key, state) ::
           {:ok, state} | {:ok, any, lifetime, state} | {:error, any}
   def fetch_config(module, config_key, state) do
-    apply(module, :fetch_config, [config_key, state])
+    module.fetch_config(config_key, state)
   rescue
     error -> {:error, error}
   end
 
+  @doc false
   @spec config_change(provider, (config_key -> :ok | {:error, any}), state) ::
           {:ok, state} | {:error, any}
   def config_change(module, callback_fun, state) when is_function(callback_fun, 1) do
-    apply(module, :config_change, [callback_fun, state])
+    module.config_change(callback_fun, state)
   rescue
     error -> {:error, error}
   end

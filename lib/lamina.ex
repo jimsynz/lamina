@@ -166,7 +166,7 @@ defmodule Lamina do
       @behaviour Lamina
 
       @doc false
-      @spec start_link(keyword) :: GenServer.on_start_link()
+      @spec start_link(keyword) :: GenServer.on_start()
       def start_link(keyword) do
         GenServer.start_link(Lamina.Server, [__MODULE__ | unquote(opts)])
       end
@@ -212,6 +212,8 @@ defmodule Lamina do
       defoverridable config_change: 3, start_link: 1, child_spec: 1
     end
   end
+
+  @type config_key :: atom
 
   @doc false
   @callback __lamina__(atom) :: []

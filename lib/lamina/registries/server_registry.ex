@@ -3,7 +3,7 @@ defmodule Lamina.Registry.ServerRegistry do
   An Elixir Registry which keeps track of `Lamina.Server` processes.
   """
 
-  alias Lamina.{Error, Table}
+  alias Lamina.{Error, Server.Table}
 
   @doc false
   @spec child_spec(any) :: Supervisor.child_spec()

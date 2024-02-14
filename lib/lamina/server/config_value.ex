@@ -27,7 +27,7 @@ defmodule Lamina.Server.ConfigValue do
   Initialise a new ConfigValue.
   """
   @spec init(config_key, lifetime, module, provider, provider_index, any) ::
-          {:ok, t} | {:error, ArgumentError.t()}
+          {:ok, t} | {:error, Exception.t()}
   def init(config_key, lifetime, module, provider, provider_index, value)
       when is_atom(config_key) and is_atom(module) and is_atom(provider) and
              is_integer(provider_index) and provider_index >= 0 do

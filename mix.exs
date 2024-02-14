@@ -21,9 +21,9 @@ defmodule Lamina.MixProject do
   def package do
     [
       maintainers: ["James Harton <james@harton.nz>"],
-      licenses: ["Hippocratic"],
+      licenses: ["HL3-FULL"],
       links: %{
-        "Source" => "https://gitlab.com/jimsy/lamina"
+        "Source" => "https://harton.dev/james/lamina"
       }
     ]
   end
@@ -37,8 +37,11 @@ defmodule Lamina.MixProject do
 
   defp deps do
     [
-      {:credo, "~> 1.6", only: ~w[dev test]a},
-      {:ex_doc, ">= 0.28.1", only: ~w[dev test]a},
+      {:credo, "~> 1.6", only: ~w[dev test]a, runtime: false},
+      {:dialyxir, "~> 1.4", only: ~w[dev test]a, runtime: false},
+      {:doctor, "~> 0.21", only: ~w[dev test]a, runtime: false},
+      {:earmark, "~> 1.4", only: ~w[dev test]a, runtime: false},
+      {:ex_doc, "~> 0.30", only: ~w[dev test]a, runtime: false},
       {:ex_machina, "~> 2.7", only: ~w[dev test]a},
       {:faker, "~> 0.17.0", only: ~w[dev test]a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},

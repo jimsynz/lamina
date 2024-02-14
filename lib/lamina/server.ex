@@ -1,6 +1,7 @@
 defmodule Lamina.Server do
   use GenServer
   alias Lamina.Registry.ServerRegistry
+  alias Lamina.Error.{ConfigNotFoundError, NotRegisteredError}
   alias Lamina.Server.{ConfigValue, Impl, State, Table}
 
   @moduledoc """

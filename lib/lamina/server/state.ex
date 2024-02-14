@@ -13,7 +13,7 @@ defmodule Lamina.Server.State do
   Defines the state of the Lamina server process.
   """
 
-  alias Lamina.Server.State
+  alias Lamina.{Error.StateError, Server.State, Server.Table}
 
   @type provider_state :: Lamina.Provider.state()
 
@@ -33,6 +33,7 @@ defmodule Lamina.Server.State do
   @default_ttl_refresh_fraction 0.95
   @default_gc_timeout :timer.seconds(3)
 
+  @doc false
   @spec init(keyword) :: {:ok, t} | {:error, any}
   def init(opts) when is_list(opts) do
     with {:ok, providers} <- do_fetch(opts, :providers),
@@ -66,6 +67,7 @@ defmodule Lamina.Server.State do
     end
   end
 
+  @doc false
   @spec do_fetch(keyword, atom) :: {:ok, any} | {:error, {:field_not_found, atom}}
   defp do_fetch(opts, keyword) when is_list(opts) and is_atom(keyword) do
     case Keyword.fetch(opts, keyword) do
@@ -74,6 +76,7 @@ defmodule Lamina.Server.State do
     end
   end
 
+  @doc false
   @spec fetch_gc_timeout(keyword) :: {:ok, pos_integer} | {:error, StateError.t()}
   defp fetch_gc_timeout(opts) do
     case Keyword.fetch(opts, :gc_timeout) do
@@ -88,6 +91,7 @@ defmodule Lamina.Server.State do
     end
   end
 
+  @doc false
   @spec fetch_ttl_refresh_fraction(keyword) :: {:ok, float} | {:error, StateError.t()}
   defp fetch_ttl_refresh_fraction(opts) do
     case Keyword.fetch(opts, :ttl_refresh_fraction) do

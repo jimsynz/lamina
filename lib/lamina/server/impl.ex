@@ -242,7 +242,7 @@ defmodule Lamina.Server.Impl do
   defp with_provider_state(provider, %State{provider_states: provider_states} = state, callback)
        when is_function(callback, 1) do
     with {:ok, provider_state} <- Map.fetch(provider_states, provider),
-         {:ok, provider_state} <- apply(callback, [provider_state]) do
+         {:ok, provider_state} <- callback.(provider_state) do
       provider_states = Map.put(provider_states, provider, provider_state)
       {:ok, %State{state | provider_states: provider_states}}
     else

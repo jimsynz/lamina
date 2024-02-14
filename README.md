@@ -1,9 +1,13 @@
+[![Build Status](https://drone.harton.dev/api/badges/james/lamina/status.svg)](https://drone.harton.dev/james/lamina)
+[![Hex.pm](https://img.shields.io/hexpm/v/lamina.svg)](https://hex.pm/packages/lamina)
+[![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](https://firstdonoharm.dev/version/3/0/full.html)
+
 # Lamina
 
 Dynamic, runtime configuration for your Elixir app.
 
 Lamina allows you to define a run-time configuration pipeline that can merge
-configuration from several sources.  This allows the system to be reactive to
+configuration from several sources. This allows the system to be reactive to
 changes in its environment.
 
 ## Example
@@ -52,31 +56,31 @@ Provider order is preserved, such that providers added later (via the
 This has the effect that when more than one provider can provide a value for a
 given configuration item, the most preferred value will be returned.
 
-Each configuration item is defined using the `config/1` or `config/2` macro.  If
+Each configuration item is defined using the `config/1` or `config/2` macro. If
 the configuration item does not need casting to another type, nor validation
-then just defining it with `config/1` is sufficient.  In some cases it is
-necessary to provide additional casting or validating functions.  They can be
+then just defining it with `config/1` is sufficient. In some cases it is
+necessary to provide additional casting or validating functions. They can be
 provided by passing a block containing the `cast/1` or `validate/1` macros.
 
 Make sure that you add your configuration module to your application's
-supervisor tree **before** any processes that rely on it's information.  Lamina
+supervisor tree **before** any processes that rely on it's information. Lamina
 will fail to start or shutdown on any errors it encounters.
 
 ## Lifetimes
 
 All configuration items in Lamina are explicitly marked with a lifetime, which
-must be specified by the configuration provider when returning values.  The
+must be specified by the configuration provider when returning values. The
 semantics are as follows:
 
 - `:volatile` - a configuration that could potentially be different every time
-  it is read.  Volatile configuration items are returned by the `ApplicationEnv`
+  it is read. Volatile configuration items are returned by the `ApplicationEnv`
   and `Env` providers.
 - `:static` - a configuration value that is not going to change until the
-  provider changes it.  Static configuration items are returned by the `Default`
+  provider changes it. Static configuration items are returned by the `Default`
   provider, but could also be used for a configuration provider that notifies
   the system of configuration changes in some way.
 - `{non_neg_integer(), System.time_unit()}` - a value that has a specific expiry
-  time.  This may be used for a configuration source that has explicit leases on
+  time. This may be used for a configuration source that has explicit leases on
   values (ala [Vault](https://www.vaultproject.io/) or a value for which
   querying is expensive, and providing an expiry would effectively cache it.
 
@@ -84,14 +88,14 @@ semantics are as follows:
 
 When asked to retrieve a configuration value, Lamina queries it's ETS table
 using the following query plan; values for which there is no expiry, or which
-have not yet expired, ordered by provider weight, descending.  It only ever
+have not yet expired, ordered by provider weight, descending. It only ever
 returns a single row.
 
 If the returned row is marked as `:volatile` then the configuration provider is
 immediately queried for a new value, meaning that these requests will pay the
-cost of a `GenServer.call/3` to ensure freshness.  If this is an issue then you
-should consider changing the provider lifetime to use an expiry.  The
-`ApplicationEnv` and `Env` providers have a configuration option to do this.  If
+cost of a `GenServer.call/3` to ensure freshness. If this is an issue then you
+should consider changing the provider lifetime to use an expiry. The
+`ApplicationEnv` and `Env` providers have a configuration option to do this. If
 you are the developer of a volatile provider, it is strongly suggested that you
 provide for this use case.
 
@@ -101,13 +105,13 @@ The following options can be passed to the `use Lamina` macro, although it's
 probably advisable to leave them as their defaults.
 
 - `gc_timeout: pos_integer()` - how long the server should be idle before
-  removing expired configuration from the ETS table in milliseconds.  Defaults
+  removing expired configuration from the ETS table in milliseconds. Defaults
   to 3000.
 - `ttl_refresh_fraction: float` - when presented with a configuration value
   which has an expiry, the server queues a refresh at some point prior to the
-  value expiring, in order to avoid having missing configuration.  Setting this
+  value expiring, in order to avoid having missing configuration. Setting this
   to a value between `0` and `1` specifies the proportion of the expiry time to
-  wait before attempting to refresh the value.  Defaults to `0.95`.
+  wait before attempting to refresh the value. Defaults to `0.95`.
 
 ## Configuration subscriptions
 
@@ -167,3 +171,21 @@ end
 ```
 
 Documentation for the latest release can be found on [HexDocs](https://hexdocs.pm/lamina) and for the `main` branch [here](https://jimsy.gitlab.io/lamina/api-reference.html).
+
+## Github Mirror
+
+This repository is mirrored [on Github](https://github.com/jimsynz/lamina)
+from it's primary location [on my Forejo instance](https://harton.dev/james/lamina).
+Feel free to raise issues and open PRs on Github.
+
+## License
+
+This software is licensed under the terms of the
+[HL3-FULL](https://firstdonoharm.dev), see the `LICENSE.md` file included with
+this package for the terms.
+
+This license actively proscribes this software being used by and for some
+industries, countries and activities. If your usage of this software doesn't
+comply with the terms of this license, then [contact me](mailto:james@harton.nz)
+with the details of your use-case to organise the purchase of a license - the
+cost of which may include a donation to a suitable charity or NGO.

@@ -14,17 +14,20 @@ defmodule Lamina.Registry.PubSubRegistry do
     }
   end
 
+  @doc false
   @spec subscribe(module, config_key) :: :ok when config_key: atom
   def subscribe(module, config_key) when is_atom(config_key) do
     Registry.register(__MODULE__, {module, config_key}, nil)
     :ok
   end
 
+  @doc false
   @spec unsubscribe(module, config_key) :: :ok when config_key: atom
   def unsubscribe(module, config_key) when is_atom(config_key) do
     Registry.unregister(__MODULE__, {module, config_key})
   end
 
+  @doc false
   @spec publish(module, config_key, old_value, new_value) :: :ok
         when config_key: atom, old_value: any, new_value: any
   def publish(module, config_key, old_value, new_value) do

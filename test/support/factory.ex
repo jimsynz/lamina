@@ -3,6 +3,7 @@ defmodule Factory do
   alias Lamina.Server.ConfigValue
   @moduledoc false
 
+  @doc false
   def config_value_factory do
     lifetime = lifetime_factory()
     expires_at = build(:expires_at, lifetime: lifetime)
@@ -20,6 +21,7 @@ defmodule Factory do
     }
   end
 
+  @doc false
   def lifetime_factory do
     case :rand.uniform(3) do
       1 -> :volatile
@@ -28,6 +30,7 @@ defmodule Factory do
     end
   end
 
+  @doc false
   def expires_at_factory(attrs) do
     case Map.get(attrs, :lifetime, nil) do
       {n, unit} -> DateTime.utc_now() |> DateTime.add(n, unit) |> DateTime.to_unix(:millisecond)
@@ -35,6 +38,7 @@ defmodule Factory do
     end
   end
 
+  @doc false
   def module_factory do
     module =
       Faker.Commerce.product_name_product()

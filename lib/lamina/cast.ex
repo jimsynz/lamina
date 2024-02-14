@@ -8,7 +8,7 @@ defmodule Lamina.Cast do
 
   Feel free to [open a PR][1] to add more.
 
-  [1]: https://gitlab.com/jimsy/lamina/-/merge_requests
+  [1]: https://harton.dev/james/lamina/-/merge_requests
   """
 
   @doc """
