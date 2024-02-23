@@ -14,7 +14,11 @@ defmodule Lamina.MixProject do
       description: @description,
       deps: deps(),
       package: package(),
-      elixirc_paths: elixirc_paths(Mix.env())
+      elixirc_paths: elixirc_paths(Mix.env()),
+      docs: [
+        main: "readme",
+        extras: ["README.md", "CHANGELOG.md"]
+      ]
     ]
   end
 
@@ -23,7 +27,10 @@ defmodule Lamina.MixProject do
       maintainers: ["James Harton <james@harton.nz>"],
       licenses: ["HL3-FULL"],
       links: %{
-        "Source" => "https://harton.dev/james/lamina"
+        "Source" => "https://harton.dev/james/lamina",
+        "GitHub" => "https://github.com/jimsynz/lamina",
+        "Changelog" => "https://docs.harton.nz/james/lamina/changelog.html",
+        "Sponsor" => "https://github.com/sponsors/jimsynz"
       }
     ]
   end
