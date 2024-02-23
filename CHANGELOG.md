@@ -5,6 +5,11 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.4.1](https://harton.dev/james/lamina/compare/v0.4.0...v0.4.1) (2024-02-23)
+
+
+
+
 ## [v0.4.0](https://harton.dev/james/lamina/compare/v0.3.0...v0.4.0) (2021-09-28)
 
 ### Features:
