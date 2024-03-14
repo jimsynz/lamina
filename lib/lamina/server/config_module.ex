@@ -5,8 +5,8 @@ defmodule Lamina.Server.ConfigModule do
   @doc """
   Ensure that the module in question actually implements the Lamina behaviour.
   """
-  @spec is_lamina_module(module) :: {:ok, module} | {:error, NotALaminaModuleError.t()}
-  def is_lamina_module(module) do
+  @spec assert_lamina_module(module) :: {:ok, module} | {:error, NotALaminaModuleError.t()}
+  def assert_lamina_module(module) do
     behaviours =
       :attributes
       |> module.__info__()

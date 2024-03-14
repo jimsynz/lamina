@@ -7,15 +7,15 @@ defmodule Lamina.Server.ProviderTest do
   import Factory
   @moduledoc false
 
-  describe "is_provider_module/1" do
+  describe "assert_provider_module/1" do
     test "when the module implements the Lamina.Provider behaviour, it is true" do
       module = Lamina.Provider.Default
-      assert {:ok, ^module} = Provider.is_provider_module(module)
+      assert {:ok, ^module} = Provider.assert_provider_module(module)
     end
 
     test "when the module does not implement the Lamina.Provider behaviour, it is false" do
       module = module_factory()
-      assert {:error, %NotAProviderModuleError{}} = Provider.is_provider_module(module)
+      assert {:error, %NotAProviderModuleError{}} = Provider.assert_provider_module(module)
     end
   end
 

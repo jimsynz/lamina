@@ -6,15 +6,15 @@ defmodule Lamina.Server.ConfigModuleTest do
   import Factory
   @moduledoc false
 
-  describe "is_lamina_module/1" do
+  describe "assert_lamina_module/1" do
     test "when the module implements the Lamina behaviour, it is ok" do
       module = MyHttpServer.Config
-      assert {:ok, ^module} = ConfigModule.is_lamina_module(module)
+      assert {:ok, ^module} = ConfigModule.assert_lamina_module(module)
     end
 
     test "when the module does not implement the Lamina behaviour, it is an error" do
       module = module_factory()
-      assert {:error, %NotALaminaModuleError{}} = ConfigModule.is_lamina_module(module)
+      assert {:error, %NotALaminaModuleError{}} = ConfigModule.assert_lamina_module(module)
     end
   end
 

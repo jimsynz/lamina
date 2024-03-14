@@ -11,8 +11,9 @@ defmodule Lamina.Server.Provider do
   @type lifetime :: Lamina.Provider.lifetime()
 
   @doc false
-  @spec is_provider_module(provider) :: {:ok, provider} | {:error, NotAProviderModuleError.t()}
-  def is_provider_module(module) do
+  @spec assert_provider_module(provider) ::
+          {:ok, provider} | {:error, NotAProviderModuleError.t()}
+  def assert_provider_module(module) do
     behaviours =
       :attributes
       |> module.__info__()

@@ -15,7 +15,7 @@ defmodule Lamina.Server.Impl do
   """
   @spec init(nonempty_improper_list(module, keyword)) :: {:ok, State.t()} | {:error, any}
   def init([module | opts]) do
-    with {:ok, module} <- ConfigModule.is_lamina_module(module),
+    with {:ok, module} <- ConfigModule.assert_lamina_module(module),
          table <- Table.new(module),
          {:ok, _pid} <- ServerRegistry.register(module, table),
          config_keys <- ConfigModule.config_keys(module),
