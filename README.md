@@ -165,7 +165,7 @@ by adding `lamina` to your list of dependencies in `mix.exs`:
 ```elixir
 def deps do
   [
-    {:lamina, "~> 0.4.1"}
+    {:lamina, "~> 0.4.2"}
   ]
 end
 ```

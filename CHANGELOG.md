@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.4.2](https://harton.dev/james/lamina/compare/v0.4.1...v0.4.2) (2024-03-14)
+
+
+
+
+### Bug Fixes:
+
+* Fix credo miswarnings.
+
 ## [v0.4.1](https://harton.dev/james/lamina/compare/v0.4.0...v0.4.1) (2024-02-23)
 
 

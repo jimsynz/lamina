@@ -2,7 +2,7 @@ defmodule Lamina.MixProject do
   use Mix.Project
   @moduledoc false
 
-  @version "0.4.1"
+  @version "0.4.2"
   @description "Dynamic, runtime configuration for your Elixir app"
 
   def project do
