@@ -54,7 +54,7 @@ defmodule Lamina.MixProject do
       {:faker, "~> 0.18.0", only: ~w[dev test]a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
       {:mimic, "~> 1.5", only: ~w[dev test]a},
-      {:recase, "~> 0.7"}
+      {:recase, "~> 0.8"}
     ]
   end
 
