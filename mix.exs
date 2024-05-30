@@ -49,7 +49,7 @@ defmodule Lamina.MixProject do
       {:doctor, "~> 0.21", only: ~w[dev test]a, runtime: false},
       {:earmark, "~> 1.4", only: ~w[dev test]a, runtime: false},
       {:ex_check, "~> 0.16", only: ~w[dev test]a, runtime: false},
-      {:ex_doc, "~> 0.33", only: ~w[dev test]a, runtime: false},
+      {:ex_doc, "~> 0.34", only: ~w[dev test]a, runtime: false},
       {:ex_machina, "~> 2.7", only: ~w[dev test]a},
       {:faker, "~> 0.18.0", only: ~w[dev test]a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
