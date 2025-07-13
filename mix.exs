@@ -52,7 +52,7 @@ defmodule Lamina.MixProject do
       {:ex_machina, "~> 2.7", only: ~w[dev test]a},
       {:faker, "~> 0.18.0", only: ~w[dev test]a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
-      {:mimic, "~> 2.0", only: ~w[dev test]a},
+      {:mimic, "~> 1.12", only: ~w[dev test]a},
       {:recase, "~> 0.8"}
     ]
   end
