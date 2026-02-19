@@ -215,17 +215,20 @@ defmodule Lamina.Server.Impl do
     with {:ok, %ConfigValue{value: initial_value}} <- Table.get(table, config_key),
          {:ok, state} <- ensure_latest_provider_value(provider, config_key, state),
          {:ok, %ConfigValue{value: final_value} = final_config} <- Table.get(table, config_key) do
-      if initial_value != final_value do
-        Task.start_link(fn ->
-          PubSubRegistry.publish(module, config_key, initial_value, final_value)
-          ConfigModule.config_change(module, config_key, initial_value, final_value)
-        end)
-      end
-
+      maybe_notify_change(module, config_key, initial_value, final_value)
       {:ok, final_config, state}
     else
       {:error, reason} -> {:error, reason}
     end
+  end
+
+  defp maybe_notify_change(_module, _config_key, same, same), do: :ok
+
+  defp maybe_notify_change(module, config_key, old_value, new_value) do
+    Task.start_link(fn ->
+      PubSubRegistry.publish(module, config_key, old_value, new_value)
+      ConfigModule.config_change(module, config_key, old_value, new_value)
+    end)
   end
 
   @spec ensure_latest_provider_value(provider, config_key, State.t()) ::
