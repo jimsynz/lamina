@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.4.3](https://harton.dev/james/lamina/compare/v0.4.2...v0.4.3) (2026-02-19)
+
+
+
+
+### Bug Fixes:
+
+* extract `maybe_notify_change/4` to reduce nesting depth in `get_latest_value/3` by James Harton
+
 ## [v0.4.2](https://harton.dev/james/lamina/compare/v0.4.1...v0.4.2) (2024-03-14)
 
 
