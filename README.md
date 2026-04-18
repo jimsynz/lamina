@@ -1,4 +1,3 @@
-[![Build Status](https://drone.harton.dev/api/badges/james/lamina/status.svg)](https://drone.harton.dev/james/lamina)
 [![Hex.pm](https://img.shields.io/hexpm/v/lamina.svg)](https://hex.pm/packages/lamina)
 [![Hippocratic License HL3-FULL](https://img.shields.io/static/v1?label=Hippocratic%20License&message=HL3-FULL&labelColor=5e2751&color=bc8c3d)](https://firstdonoharm.dev/version/3/0/full.html)
 
@@ -171,8 +170,7 @@ end
 ```
 
 Documentation for the latest release can be found on
-[HexDocs](https://hexdocs.pm/lamina) and for the `main` branch on
-[docs.harton.nz](https://docs.harton.nz/james/lamina).
+[HexDocs](https://hexdocs.pm/lamina).
 
 ## Github Mirror
 
