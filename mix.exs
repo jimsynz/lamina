@@ -29,7 +29,6 @@ defmodule Lamina.MixProject do
       links: %{
         "Source" => "https://harton.dev/james/lamina",
         "GitHub" => "https://github.com/jimsynz/lamina",
-        "Changelog" => "https://docs.harton.nz/james/lamina/changelog.html",
         "Sponsor" => "https://github.com/sponsors/jimsynz"
       }
     ]
