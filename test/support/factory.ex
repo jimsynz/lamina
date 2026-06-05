@@ -8,7 +8,7 @@ defmodule Factory do
     lifetime = lifetime_factory()
     expires_at = build(:expires_at, lifetime: lifetime)
 
-    config_key = Faker.Commerce.product_name_adjective() |> Recase.to_snake() |> String.to_atom()
+    config_key = random_word() |> Recase.to_snake() |> String.to_atom()
 
     %ConfigValue{
       config_key: config_key,
@@ -17,7 +17,7 @@ defmodule Factory do
       module: module_factory(),
       provider: module_factory(),
       provider_index: :rand.uniform(99),
-      value: Faker.Commerce.product_name_material()
+      value: random_word()
     }
   end
 
@@ -41,9 +41,14 @@ defmodule Factory do
   @doc false
   def module_factory do
     module =
-      Faker.Commerce.product_name_product()
+      random_word()
       |> Recase.to_pascal()
 
     :"Elixir.#{module}"
+  end
+
+  defp random_word do
+    1..Enum.random(4..12)
+    |> Enum.map_join(fn _ -> <<Enum.random(?a..?z)>> end)
   end
 end

@@ -50,7 +50,6 @@ defmodule Lamina.MixProject do
       {:ex_check, "~> 0.16", only: ~w[dev test]a, runtime: false},
       {:ex_doc, "~> 0.40", only: ~w[dev test]a, runtime: false},
       {:ex_machina, "~> 2.7", only: ~w[dev test]a},
-      {:faker, "~> 0.18.0", only: ~w[dev test]a},
       {:git_ops, "~> 2.4", only: ~w[dev test]a, runtime: false},
       {:mimic, "~> 2.0", only: ~w[dev test]a},
       {:recase, "~> 0.9"}
