@@ -29,10 +29,10 @@ defmodule Lamina.Error.ConfigNotFoundError do
   end
 
   @impl true
-  def message(%ConfigNotFoundError{config_key: config_key, table: table}),
-    do: "No value for `#{config_key}` found in table `#{inspect(table)}`."
-
   def message(%ConfigNotFoundError{config_key: config_key, state: %State{} = state}),
     do:
       "The module `#{inspect(state.module)}` does not contain a configuration called `#{config_key}`"
+
+  def message(%ConfigNotFoundError{config_key: config_key, table: table}),
+    do: "No value for `#{config_key}` found in table `#{inspect(table)}`."
 end
