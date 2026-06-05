@@ -5,6 +5,15 @@ See [Conventional Commits](Https://conventionalcommits.org) for commit guideline
 
 <!-- changelog -->
 
+## [v0.4.4](https://harton.dev/james/lamina/compare/v0.4.3...v0.4.4) (2026-06-05)
+
+
+
+
+### Bug Fixes:
+
+* resolve redundant `message/1` clause flagged by Elixir 1.20 by James Harton
+
 ## [v0.4.3](https://harton.dev/james/lamina/compare/v0.4.2...v0.4.3) (2026-02-19)
 
 
